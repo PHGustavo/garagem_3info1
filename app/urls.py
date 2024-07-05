@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 
+
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -9,9 +10,12 @@ from drf_spectacular.views import (
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from core.views import UserViewSet
+from core.views import UserViewSet, AcessorioViewSet, CategoriaViewSet
+
 
 router = DefaultRouter()
+router.register(r"acessorios", AcessorioViewSet) # nova linha
+router.register(r"users", UserViewSet, basename="users")
 
 router.register(r"usuarios", UserViewSet, basename="usuarios")
 
@@ -34,4 +38,5 @@ urlpatterns = [
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     # API
     path("api/", include(router.urls)),
+
 ]
